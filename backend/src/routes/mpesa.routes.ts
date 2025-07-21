@@ -54,3 +54,4 @@ router.post('/pay', async (req: Request, res: Response, next: NextFunction): Pro
 router.post('/stkpush', initiateStkPushController);
 
 export default router;
+ 

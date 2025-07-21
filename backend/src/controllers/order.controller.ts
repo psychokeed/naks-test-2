@@ -103,6 +103,27 @@ export const getAllOrders = async (_req: Request, res: Response): Promise<void> 
   }
 };
 
+// ✅ Get a single order by ID (Admin)
+export const getSingleOrder = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    const order = await Order.findById(id).populate('user', 'name email');
+    if (!order) {
+      res.status(404).json({ message: 'Order not found' });
+      return;
+    }
+
+    res.status(200).json(order);
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to fetch order',
+      error: err instanceof Error ? err.message : err,
+    });
+  }
+};
+
+
 // ✅ Update Order Status (Admin)
 export const updateOrderStatus = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -136,3 +157,4 @@ export const updateOrderStatus = async (req: Request, res: Response): Promise<vo
     res.status(500).json({ message: 'Error updating order status', error: err });
   }
 };
+

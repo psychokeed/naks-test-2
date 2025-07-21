@@ -60,6 +60,7 @@ app.use('/api/mpesa', mpesaRoutes);
 // 📁 Serve uploaded files statically
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
+
 // 🌍 Health check endpoint
 app.get('/', (_req, res) => {
   res.send('NAKS-Care API is running...');

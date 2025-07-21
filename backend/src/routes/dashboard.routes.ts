@@ -1,4 +1,5 @@
 import express from 'express';
+import { getAdminDashboardStats } from '../controllers/dashboard.controller';
 import authMiddleware, { adminOnly } from '../middlewares/auth.middleware';
 
 const router = express.Router();
@@ -14,5 +15,7 @@ router.get('/client', authMiddleware, (req, res) => {
   }
   res.json({ message: 'Welcome to the client dashboard' });
 });
+
+router.get('/stats', authMiddleware, adminOnly, getAdminDashboardStats);
 
 export default router;
